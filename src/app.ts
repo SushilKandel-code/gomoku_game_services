@@ -1,12 +1,4 @@
-import express from 'express'
+import express, { Express, Request, Response } from 'express'
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 
-const app = express()
-const port = 1234
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Connection Successfull on port ${port}`)
-})
