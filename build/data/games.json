@@ -1,0 +1,9 @@
+[
+    {
+        "userId": "62f88bd5e67347af189c4baa",
+        "status": "Game Status",
+        "date": "Date",
+        "board": 5,
+        "stones": [4, 5]
+    }
+]

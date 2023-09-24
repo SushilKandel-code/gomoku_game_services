@@ -12,17 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createUser = exports.getUserByID = exports.getUserByUsername = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const dbUri = "mongodb://atlas-sql-650f25d4349cbc1216a09482-xmrmf.a.query.mongodb.net/Gomoku?ssl=true&authSource=admin";
-    console.log('[SERVER: Connecting to database....');
-    try {
-        yield mongoose_1.default.connect(dbUri);
-    }
-    catch (error) {
-        console.log("[SERVER: Failed to connect to database");
-        console.log(error);
-        process.exit(1);
-    }
-});
-exports.default = connectDB;
+const userModel_1 = __importDefault(require("../model/userModel"));
+function getUserByUsername(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return userModel_1.default.findOne({ username }).lean();
+    });
+}
+exports.getUserByUsername = getUserByUsername;
+function getUserByID(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return userModel_1.default.findOne({ _id: new mongoose_1.default.Types.ObjectId(id) }).lean();
+    });
+}
+exports.getUserByID = getUserByID;
+function createUser(user) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return userModel_1.default.create(user);
+    });
+}
+exports.createUser = createUser;

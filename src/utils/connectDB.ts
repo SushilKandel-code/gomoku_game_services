@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const connectDB =async () => {
-    const dbUri= process.env.dbURI || '';
+    const dbUri= "mongodb://atlas-sql-650f25d4349cbc1216a09482-xmrmf.a.query.mongodb.net/Gomoku?ssl=true&authSource=admin";
     console.log('[SERVER: Connecting to database....')
     try{
         await mongoose.connect(dbUri);

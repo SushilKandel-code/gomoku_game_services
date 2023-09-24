@@ -12,17 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const dbUri = "mongodb://atlas-sql-650f25d4349cbc1216a09482-xmrmf.a.query.mongodb.net/Gomoku?ssl=true&authSource=admin";
-    console.log('[SERVER: Connecting to database....');
+require("dotenv/config");
+const connectDB_1 = __importDefault(require("./connectDB"));
+const userModel_1 = __importDefault(require("../model/userModel"));
+const user_json_1 = __importDefault(require("../data/user.json"));
+const gameModel_1 = __importDefault(require("../model/gameModel"));
+const games_json_1 = __importDefault(require("../data/games.json"));
+const run = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(dbUri);
+        yield (0, connectDB_1.default)();
+        yield userModel_1.default.deleteMany();
+        yield userModel_1.default.insertMany(user_json_1.default);
+        yield gameModel_1.default.deleteMany();
+        yield gameModel_1.default.insertMany(games_json_1.default);
+        process.exit(0);
     }
-    catch (error) {
-        console.log("[SERVER: Failed to connect to database");
-        console.log(error);
+    catch (err) {
+        console.log(err);
         process.exit(1);
     }
 });
-exports.default = connectDB;
+run();

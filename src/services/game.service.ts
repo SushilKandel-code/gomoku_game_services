@@ -1,4 +1,4 @@
-import mongoose, { DocumentDefinition } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { GameDoc } from '../model/gameModel';
 import GameModel from '../model/gameModel';
 
@@ -18,12 +18,12 @@ export async function getGamesByUserID(userId: string){
 }
 
 //  Function to create a new game.
-export async function createGame(input: DocumentDefinition<GameDoc>){
+export async function createGame(input: Document<GameDoc>){
     return GameModel.create(input);
 }
 
 //  Function to update a game.
-export async function updateGame(id: string, userID: string, input: DocumentDefinition<GameDoc>){  // added userId.
+export async function updateGame(id: string, userID: string, input: Document<GameDoc>){  // added userId.
     return GameModel.findOneAndUpdate(
         {
             _id: new mongoose.Types.ObjectId(id),
