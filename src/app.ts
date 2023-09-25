@@ -3,16 +3,18 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import connectDB from './utils/connectDB'
 import authHandler from './handler/authHandler';
+import gameHandler from './handler/gameHandler';
 
 
 dotenv.config();
 //  Connect to database.
 connectDB();
 const app: Express = express();
-const port = 5050;
-app.use(express.json());
+const port = process.env.PORT;
 
-app.use('api/auth', authHandler);
+app.use(express.json());
+app.use('/api/auth', authHandler);
+app.use('/api/games', gameHandler);
 
 
 mongoose.connection.once('connected', () => {

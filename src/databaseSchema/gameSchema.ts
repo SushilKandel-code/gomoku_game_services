@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { string, object, number, array, TypeOf} from 'zod';
 
 const payload = {

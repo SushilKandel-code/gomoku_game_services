@@ -14,7 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const dbUri = "mongodb://atlas-sql-650f25d4349cbc1216a09482-xmrmf.a.query.mongodb.net/Gomoku?ssl=true&authSource=admin";
+    const dbUri = "mongodb+srv://sushil:sushil@cluster0.j5geuwi.mongodb.net/Gomoku?retryWrites=true&w=majority";
+    mongoose_1.default.set('strictQuery', false);
     console.log('[SERVER: Connecting to database....');
     try {
         yield mongoose_1.default.connect(dbUri);

@@ -1,4 +1,4 @@
-import mongoose, {SchemaDefinition} from 'mongoose';
+import mongoose, {DocumentDefinition} from 'mongoose';
 import UserModel, { UserDoc } from '../model/userModel';
 
 export async function getUserByUsername(username: string){
@@ -10,6 +10,6 @@ export async function getUserByID(id:string) {
     
 }
 
-export async function createUser(user:SchemaDefinition<UserDoc>) {
+export async function createUser(user:DocumentDefinition<UserDoc>) {
     return UserModel.create(user);   
 }

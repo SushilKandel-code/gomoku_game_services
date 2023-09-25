@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 
 const connectDB =async () => {
-    const dbUri= "mongodb://atlas-sql-650f25d4349cbc1216a09482-xmrmf.a.query.mongodb.net/Gomoku?ssl=true&authSource=admin";
+    const dbUri= "mongodb+srv://sushil:sushil@cluster0.j5geuwi.mongodb.net/Gomoku?retryWrites=true&w=majority";
+    mongoose.set('strictQuery', false);
     console.log('[SERVER: Connecting to database....')
     try{
         await mongoose.connect(dbUri);
@@ -12,5 +13,7 @@ const connectDB =async () => {
     }
     
 }
-
 export default connectDB;
+
+
+
