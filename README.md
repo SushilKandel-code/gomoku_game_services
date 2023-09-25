@@ -1,1 +1,2 @@
-# gomoku_game_services
+# Gomoku Game Backend
+
