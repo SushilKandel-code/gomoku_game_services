@@ -30,9 +30,9 @@ function getGameByID(id) {
 }
 exports.getGameByID = getGameByID;
 //  Function to return games by userId.
-function getGamesByUserID(userId) {
+function getGamesByUserID(userID) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield gameModel_1.default.find({ userId }).lean();
+        return yield gameModel_1.default.find({ userID }).lean();
     });
 }
 exports.getGamesByUserID = getGamesByUserID;
@@ -48,7 +48,7 @@ function updateGame(id, userID, input) {
     return __awaiter(this, void 0, void 0, function* () {
         return gameModel_1.default.findOneAndUpdate({
             _id: new mongoose_1.default.Types.ObjectId(id),
-            userId: new mongoose_1.default.Types.ObjectId(userID)
+            userID: new mongoose_1.default.Types.ObjectId(userID)
         }, input, { new: true });
     });
 }

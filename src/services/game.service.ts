@@ -13,8 +13,8 @@ export async function getGameByID(id: string){
 }
 
 //  Function to return games by userId.
-export async function getGamesByUserID(userId: string){
-    return await GameModel.find({userId}).lean();
+export async function getGamesByUserID(userID: string){
+    return await GameModel.find({userID}).lean();
 }
 
 //  Function to create a new game.
@@ -27,7 +27,7 @@ export async function updateGame(id: string, userID: string, input: DocumentDefi
     return GameModel.findOneAndUpdate(
         {
             _id: new mongoose.Types.ObjectId(id),
-            userId: new mongoose.Types.ObjectId(userID)
+            userID: new mongoose.Types.ObjectId(userID)
         },
         input,
         { new: true }

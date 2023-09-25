@@ -11,6 +11,7 @@ gameHandler.use(userDeserialize);
 //get games
 gameHandler.get("/", async(req: Request, res: Response) =>{
     const userID = req.userId;
+    console.log(userID);
     const games = await getGamesByUserID(userID);
     if(!games) return res.sendStatus(404);
     return res.status(200).json(games);
@@ -35,12 +36,19 @@ gameHandler.post("/", schemaVaidate(createGameSchema), async(req: Request, res:R
 
 //updating game
 gameHandler.put("/:id", schemaVaidate(updateGameSchema), async(req:Request, res:Response)=>{
-    const userID = req.userId;
+    try{
+
+        const userID = req.userId;
     const game = req.body;
     const gameID = req.params.id;
     const newGame = await updateGame(gameID, userID, {...game, userID});
+    console.log(newGame);
     if(!newGame) return res.sendStatus(400);
     return res.status(200).json(newGame);
+    }catch(err){
+        console.log(err);
+    }
+    
 })
 
 //delete game

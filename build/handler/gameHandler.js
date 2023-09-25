@@ -22,6 +22,7 @@ gameHandler.use(userDeserialize_1.userDeserialize);
 //get games
 gameHandler.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userID = req.userId;
+    console.log(userID);
     const games = yield (0, game_service_1.getGamesByUserID)(userID);
     if (!games)
         return res.sendStatus(404);
@@ -45,13 +46,19 @@ gameHandler.post("/", (0, schemaValidate_1.default)(gameSchema_1.createGameSchem
 }));
 //updating game
 gameHandler.put("/:id", (0, schemaValidate_1.default)(gameSchema_1.updateGameSchema), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userID = req.userId;
-    const game = req.body;
-    const gameID = req.params.id;
-    const newGame = yield (0, game_service_1.updateGame)(gameID, userID, Object.assign(Object.assign({}, game), { userID }));
-    if (!newGame)
-        return res.sendStatus(400);
-    return res.status(200).json(newGame);
+    try {
+        const userID = req.userId;
+        const game = req.body;
+        const gameID = req.params.id;
+        const newGame = yield (0, game_service_1.updateGame)(gameID, userID, Object.assign(Object.assign({}, game), { userID }));
+        console.log(newGame);
+        if (!newGame)
+            return res.sendStatus(400);
+        return res.status(200).json(newGame);
+    }
+    catch (err) {
+        console.log(err);
+    }
 }));
 //delete game
 gameHandler.delete("/:id", (0, schemaValidate_1.default)(gameSchema_1.deleteGameSchema), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
