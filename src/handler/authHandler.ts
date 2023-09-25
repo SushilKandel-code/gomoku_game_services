@@ -12,7 +12,7 @@ const authHandler = express.Router();
 authHandler.post("/register", schemaValidate(schemaRegister), async (req: Request<{}, {}, InputRegister['body']>, res: Response) => {
     try{
         const { username, password } = req.body;
-        console.log(req.body);
+        console.log(req.body)
         //check whether user already exists in database or not
         const existingUser = await getUserByUsername(username);
 
@@ -31,14 +31,13 @@ authHandler.post("/register", schemaValidate(schemaRegister), async (req: Reques
        
 
         //creating token
-         //const token = signJWT({ username, _id: newUser._id});
+         const token = signJWT({ username, _id: newUser._id});
         //returning new user with jwt token
-        res.status(200).send(newUser)
-        console.log(newUser)
+        res.status(200).json({ _id: newUser._id, token })
     
     }catch(err){
+        console.log(err)
         return res.status(500).send(err);
-
     }
 })
 
@@ -48,17 +47,19 @@ authHandler.post("/login", async (req: Request<{}, {}, InputLogin['body']>, res:
     try{
         //getting user input
         const {username, password} = req.body;
+        console.log(req.body);
         //validating use either it is already exist in database or not
         const user = await getUserByUsername(username);
-        console.log("User:" + {user});
+        console.log(user);
 
         if( user && (await bcrypt.compare(password, user.password))){
             //token creating
-            // const token = signJWT({username, _id: user._id});
-            return res.status(200).json({username, _id: user._id});
+            const token = signJWT({username, _id: user._id});
+            return res.status(200).json({_id: user._id, token});
         }
         return res.status(400).send('Invalid Credentials');
     } catch(err){
+        console.log(err)
         return res.status(500).send(err);
     }
 })
