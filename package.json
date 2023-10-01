@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc && node build/app.js"
+    "postinstall": "tsc",
+    "start": "node build/app.js"
   },
   "keywords": [],
   "author": "",
