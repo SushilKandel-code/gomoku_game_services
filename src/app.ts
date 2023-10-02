@@ -11,7 +11,7 @@ dotenv.config();
 //  Connect to database.
 connectDB();
 const app: Express = express();
-const port = 8888;
+const port = process.env.PORT;
 app.use(express.json());
 app.use('/api/auth', authHandler);
 app.use('/api/games', gameHandler);
