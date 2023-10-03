@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import connectDB from './utils/connectDB'
 import authHandler from './handler/authHandler';
 import gameHandler from './handler/gameHandler';
+import cors from 'cors';
 import { env } from 'process';
 
 
@@ -12,6 +13,13 @@ dotenv.config();
 connectDB();
 const app: Express = express();
 const port = process.env.PORT;
+
+app.use(
+  cors({
+    origin: process.env.allowHost || true,
+  })
+)
+
 app.use(express.json());
 app.use('/api/auth', authHandler);
 app.use('/api/games', gameHandler);
